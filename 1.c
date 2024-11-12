@@ -4,5 +4,48 @@
 
 void print_num(int num)
 
-@@Данные на входе: Одно целое неотрицательное число
+Данные на входе: Одно целое неотрицательное число
 Данные на выходе: Все цифры числа через пробел в прямом порядке.*/
+
+#include <stdio.h>
+
+int findFirstDigit(int number)
+{
+    while (number > 9)
+    {
+        number /= 10;    
+    }
+    return number;
+}
+
+int removeFirstDigit(int number)
+{
+    int order = 1, buf = number;
+    while (number > 9)
+    {
+        order *= 10;
+        number /= 10;
+    }
+    return buf % order;
+}
+
+void print_num(int num)
+{
+    int n = findFirstDigit(num);
+    num = removeFirstDigit(num);
+    printf("%d ", n);
+    if (num > 0)
+    {
+        print_num(num);
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    int number;
+    scanf("%d", &number);
+
+    print_num(number);
+
+    return 0;
+}
